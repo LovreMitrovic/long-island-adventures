@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Long Island Adventure — Rent a Quad on Dugi Otok</title>
+  <meta name="description" content="Rent a quad and explore the wild side of Dugi Otok (Long Island), Croatia. Ride & Explore with Long Island Adventure." />
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+
+  <!-- Fonts (with graceful system fallback if offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============ Brand palette (from icon.svg + LIA_curve.pdf) ============ */
+    :root {
+      --sun:      #fbc41e;   /* golden yellow — primary   */
+      --orange:   #ed7e11;   /* sunset orange — CTA       */
+      --sand:     #f6e58b;   /* pale sand — soft highlight */
+      --sea:      #73d0e0;   /* Adriatic turquoise — accent */
+      --ink:      #2b210e;   /* dark espresso — text      */
+      --cream:    #fffbe8;   /* warm cream — background    */
+      --cream-2:  #fdf3d4;   /* deeper cream — section tint */
+      --white:    #ffffff;
+
+      --ink-soft: #5b5138;
+      --shadow:   0 18px 40px -18px rgba(43, 33, 14, .35);
+      --shadow-sm: 0 8px 20px -10px rgba(43, 33, 14, .28);
+      --radius:   22px;
+
+      --head: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+      --body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    /* ============ Reset / base ============ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: var(--head); line-height: 1.1; font-weight: 700; }
+
+    .wrap { width: min(1120px, 92vw); margin-inline: auto; }
+
+    /* ============ Buttons ============ */
+    .btn {
+      display: inline-flex; align-items: center; gap: .55em;
+      font-family: var(--head); font-weight: 600; font-size: 1.02rem;
+      padding: .8em 1.55em; border-radius: 999px; border: none; cursor: pointer;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+      white-space: nowrap;
+    }
+    .btn--cta {
+      background: linear-gradient(135deg, var(--sun), var(--orange));
+      color: var(--ink);
+      box-shadow: 0 10px 22px -8px rgba(237, 126, 17, .6);
+    }
+    .btn--cta:hover { transform: translateY(-2px); box-shadow: 0 16px 28px -10px rgba(237, 126, 17, .7); }
+    .btn--ghost {
+      background: rgba(255,255,255,.14); color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.7); backdrop-filter: blur(4px);
+    }
+    .btn--ghost:hover { background: rgba(255,255,255,.24); transform: translateY(-2px); }
+
+    /* ============ Header / nav ============ */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 251, 232, .82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(43, 33, 14, .08);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: .7rem 0; }
+    .brand { display: flex; align-items: center; gap: .7rem; }
+    .brand img { width: 46px; height: 46px; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1; }
+    .brand-name { font-family: var(--head); font-weight: 700; font-size: 1.18rem; color: var(--ink); }
+    .brand-sub { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); font-weight: 700; }
+    .nav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .nav-links a.link { font-weight: 700; font-size: .98rem; color: var(--ink-soft); transition: color .15s; }
+    .nav-links a.link:hover { color: var(--orange); }
+
+    /* ============ Hero ============ */
+    .hero {
+      position: relative; min-height: 92vh; display: flex; align-items: flex-end;
+      color: var(--white); overflow: hidden;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: url("assets/hero.jpg") center 42% / cover no-repeat;
+      transform: scale(1.02);
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(43,33,14,.45) 0%, rgba(43,33,14,0) 28%, rgba(43,33,14,.15) 55%, rgba(43,33,14,.82) 100%);
+    }
+    .hero-inner { position: relative; z-index: 2; padding: 3.5rem 0 4.5rem; width: 100%; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--head); font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+      font-size: .82rem; padding: .4rem .9rem; border-radius: 999px;
+      background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35);
+      backdrop-filter: blur(4px);
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6.5vw, 4.6rem); margin: 1.1rem 0 .6rem;
+      text-shadow: 0 4px 24px rgba(0,0,0,.35); max-width: 15ch;
+    }
+    .hero h1 .accent { color: var(--sun); }
+    .hero p.lead {
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem); max-width: 44ch; font-weight: 600;
+      text-shadow: 0 2px 14px rgba(0,0,0,.4); color: #fdf7e6;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.8rem; }
+
+    /* ============ Section shell ============ */
+    section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--head); font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+      font-size: .82rem; color: var(--orange);
+    }
+    .eyebrow::before { content: ""; width: 26px; height: 3px; border-radius: 2px; background: var(--sea); }
+    .section-title { font-size: clamp(1.9rem, 4.5vw, 3rem); margin: .6rem 0 0; }
+
+    /* ============ Quad section ============ */
+    #quad { background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%); }
+    .quad-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+    .quad-photo {
+      position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+      background: var(--white);
+    }
+    .quad-photo img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+    .quad-photo .badge {
+      position: absolute; left: 1rem; bottom: 1rem;
+      background: var(--sun); color: var(--ink); font-family: var(--head); font-weight: 700;
+      padding: .45rem 1rem; border-radius: 999px; font-size: .92rem; box-shadow: var(--shadow-sm);
+    }
+    .quad-copy h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); margin-top: .5rem; }
+    .quad-copy p { color: var(--ink-soft); font-size: 1.08rem; margin-top: 1rem; max-width: 46ch; }
+    .features { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.6rem; }
+    .chip {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--white); border: 1.5px solid rgba(43,33,14,.1);
+      padding: .55rem 1rem; border-radius: 999px; font-weight: 700; font-size: .95rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .chip svg { width: 18px; height: 18px; color: var(--orange); flex: none; }
+    .quad-copy .btn { margin-top: 1.9rem; }
+
+    /* ============ Contact section ============ */
+    #contact { background: var(--cream); }
+    .contact-head { text-align: center; max-width: 40ch; margin: 0 auto 2.6rem; }
+    .contact-head p { color: var(--ink-soft); font-size: 1.1rem; margin-top: .8rem; }
+    .contact-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(1.6rem, 4vw, 3rem); align-items: stretch; }
+
+    .card {
+      background: var(--white); border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.4rem);
+      box-shadow: var(--shadow); border: 1px solid rgba(43,33,14,.06);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: .4rem; color: var(--ink); }
+    .field { margin-bottom: 1.1rem; }
+    input, textarea {
+      width: 100%; font-family: var(--body); font-size: 1rem; color: var(--ink);
+      padding: .8rem 1rem; border-radius: 14px; border: 1.5px solid rgba(43,33,14,.16);
+      background: var(--cream); transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, textarea:focus {
+      outline: none; border-color: var(--sea);
+      box-shadow: 0 0 0 4px rgba(115, 208, 224, .3);
+    }
+    textarea { resize: vertical; min-height: 120px; }
+    .form-note { font-size: .85rem; color: var(--ink-soft); margin-top: .8rem; }
+    button.submit { width: 100%; justify-content: center; margin-top: .4rem; font-size: 1.08rem; }
+
+    /* Connect / socials card */
+    .connect { display: flex; flex-direction: column; justify-content: center; gap: 1.4rem;
+      background: linear-gradient(150deg, var(--sea) 0%, #9fe0ec 100%); color: var(--ink); }
+    .connect h3 { font-size: 1.5rem; }
+    .connect p { font-weight: 600; }
+    .socials { display: flex; gap: .9rem; flex-wrap: wrap; }
+    .social {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 56px; height: 56px; border-radius: 16px; background: var(--white); color: var(--ink);
+      box-shadow: var(--shadow-sm); transition: transform .15s, background .2s, color .2s;
+    }
+    .social:hover { transform: translateY(-3px); background: var(--ink); color: var(--white); }
+    .social svg { width: 26px; height: 26px; }
+    .social-labels { display: flex; flex-direction: column; gap: .35rem; font-weight: 700; font-size: .95rem; }
+    .social-labels a { display: inline-flex; align-items: center; gap: .55rem; }
+    .social-labels svg { width: 18px; height: 18px; }
+    .placeholder-tag { font-size: .78rem; font-weight: 700; opacity: .7; }
+
+    /* ============ Footer ============ */
+    footer { background: var(--ink); color: #f4ecd8; padding: 2.6rem 0; }
+    .foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .foot .brand-name { color: var(--sun); }
+    .foot .brand-sub { color: var(--sea); }
+    .foot img { width: 42px; height: 42px; }
+    .foot small { color: #b8ab8d; }
+
+    /* ============ Responsive ============ */
+    @media (max-width: 860px) {
+      .nav-links .link { display: none; }
+      .quad-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero { min-height: 88vh; }
+    }
+    @media (max-width: 520px) {
+      .form-row { grid-template-columns: 1fr; }
+      .brand-sub { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <div class="wrap nav">
+      <a href="#top" class="brand" aria-label="Long Island Adventure home">
+        <img src="assets/icon.svg" alt="Long Island Adventure sun logo" />
+        <span class="brand-text">
+          <span class="brand-name">Long Island Adventure</span>
+          <span class="brand-sub">Ride &amp; Explore</span>
+        </span>
+      </a>
+      <nav class="nav-links">
+        <a href="#quad" class="link">The Quad</a>
+        <a href="#contact" class="link">Contact</a>
+        <a href="#contact" class="btn btn--cta">Book now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <span class="hero-eyebrow">☀ Dugi Otok · Croatia</span>
+      <h1>Ride &amp; explore the <span class="accent">wild side</span> of Long Island</h1>
+      <p class="lead">Rent a quad and chase dirt roads, hidden coves and pine-scented hills across Dugi Otok — at your own pace.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn--cta">Book now →</a>
+        <a href="#quad" class="btn btn--ghost">See the quad</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUAD ============ -->
+  <section id="quad">
+    <div class="wrap">
+      <div class="quad-grid">
+        <div class="quad-photo">
+          <img src="assets/quad.jpg" alt="Segway Snarler AT6L quad bike" />
+          <span class="badge">Segway Snarler AT6L</span>
+        </div>
+        <div class="quad-copy">
+          <span class="eyebrow">Meet your ride</span>
+          <h2>Built for the island, easy for everyone</h2>
+          <p>
+            Our Segway Snarler AT6L is a rugged, comfortable all-terrain quad that
+            handles Dugi Otok's gravel tracks and coastal trails with ease. Twist the
+            throttle, follow the trail, and let the island open up in front of you —
+            no experience required, just a sense of adventure.
+          </p>
+          <div class="features">
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-4 4 8 2-4h6"/></svg>
+              All-terrain 4×4
+            </span>
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M14 15c3 0 8 1 8 5"/></svg>
+              Two-seater
+            </span>
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3.5"/></svg>
+              Front winch
+            </span>
+          </div>
+          <a href="#contact" class="btn btn--cta">Book this quad →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-head">
+        <span class="eyebrow" style="justify-content:center;">Book now</span>
+        <h2 class="section-title">Book your adventure</h2>
+        <p>Send us a message with your dates and we'll get you on the trail. We usually reply within a few hours.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Email form -->
+        <div class="card">
+          <!-- TODO: wire up "action" to your email / form service once contact info is ready -->
+          <form action="#" method="post" onsubmit="return false;">
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@email.com" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="dates">Preferred dates</label>
+              <input id="dates" name="dates" type="text" placeholder="e.g. 12–14 August" />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="How many people, what you'd like to do…"></textarea>
+            </div>
+            <button type="submit" class="btn btn--cta submit">Send request</button>
+            <p class="form-note">📩 Contact email will be added soon — this form is ready to connect.</p>
+          </form>
+        </div>
+
+        <!-- Socials / connect -->
+        <div class="card connect">
+          <div>
+            <h3>Or reach us directly</h3>
+            <p>Follow the ride and message us on your favourite app.</p>
+          </div>
+          <div class="socials">
+            <!-- TODO: add real links -->
+            <a href="#" class="social" aria-label="Instagram" title="Instagram (link coming soon)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="social" aria-label="TikTok" title="TikTok (link coming soon)">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3h-3.1v13.2a2.6 2.6 0 1 1-2.6-2.6c.27 0 .53.04.78.12V10.5a5.7 5.7 0 1 0 4.9 5.64V9.01a7 7 0 0 0 4.02 1.28V7.16A3.98 3.98 0 0 1 16.6 3z"/></svg>
+            </a>
+            <a href="tel:" class="social" aria-label="Phone" title="Phone (number coming soon)">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.9c1.4 2.8 3.7 5.1 6.5 6.5l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.7 21 3 13.3 3 3.9c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.4z"/></svg>
+            </a>
+          </div>
+          <div class="social-labels">
+            <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg> Instagram <span class="placeholder-tag">soon</span></a>
+            <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3h-3.1v13.2a2.6 2.6 0 1 1-2.6-2.6c.27 0 .53.04.78.12V10.5a5.7 5.7 0 1 0 4.9 5.64V9.01a7 7 0 0 0 4.02 1.28V7.16A3.98 3.98 0 0 1 16.6 3z"/></svg> TikTok <span class="placeholder-tag">soon</span></a>
+            <a href="tel:"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.9c1.4 2.8 3.7 5.1 6.5 6.5l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.7 21 3 13.3 3 3.9c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.4z"/></svg> Phone <span class="placeholder-tag">soon</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap foot">
+      <a href="#top" class="brand">
+        <img src="assets/icon.svg" alt="" />
+        <span class="brand-text">
+          <span class="brand-name">Long Island Adventure</span>
+          <span class="brand-sub">Ride &amp; Explore · Dugi Otok</span>
+        </span>
+      </a>
+      <small>© 2026 Long Island Adventure — Dugi Otok, Croatia</small>
+    </div>
+  </footer>
+
+</body>
+</html>
